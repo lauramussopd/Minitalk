@@ -14,10 +14,6 @@
 
 int main()
 {
-    while (1)
-    {
-        ft_printf("imprime: %d\n", getpid());
-        ft_printf("compila?");
-        sleep(1);
-    }
+    ft_printf("%d\n", getpid());
+
 }
