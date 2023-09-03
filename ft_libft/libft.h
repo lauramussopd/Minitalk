@@ -6,7 +6,7 @@
 /*   By: laurmuss <laurmuss@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 18:59:39 by laurmuss          #+#    #+#             */
-/*   Updated: 2023/07/04 18:35:34 by laurmuss         ###   ########.fr       */
+/*   Updated: 2023/09/03 16:14:19 by laurmuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,16 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
-int	ft_putstr(char *s);
-int	ft_tipo(char c, va_list args);
-int	ft_putchar(char c);
-int	ft_putpercentage(void);
-int	ft_putnbr(int n);
-int	ft_putuns(unsigned int b);
-int	ft_puthex(unsigned long long n);
-int	ft_puthex_maius(unsigned int n);
-int	ft_count_hex(unsigned long long b);
-int	ft_putptr(unsigned long long p);
-int	ft_printf(const char *str, ...);
-
+int		ft_putstr(char *s);
+int		ft_tipo(char c, va_list args);
+int		ft_putchar(char c);
+int		ft_putpercentage(void);
+int		ft_putnbr(int n);
+int		ft_putuns(unsigned int b);
+int		ft_puthex(unsigned long long n);
+int		ft_puthex_maius(unsigned int n);
+int		ft_count_hex(unsigned long long b);
+int		ft_putptr(unsigned long long p);
+int		ft_printf(const char *str, ...);
 
 #endif
