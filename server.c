@@ -61,7 +61,7 @@ void	receive_bit(int sign)
 	}
 	else
 	{
-		receive_msg(sign, &i, &num_bit);
+		receive_msg(sign, &i, &num_bit); 
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: laurmuss <laurmuss@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:51:17 by laurmuss          #+#    #+#             */
-/*   Updated: 2023/09/03 15:53:49 by laurmuss         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:24:40 by laurmuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,36 @@
 #include <stdio.h>
 #include <signal.h>
 
-void	send_binary_str(char *str, int pidserv)
+int	send_binary_str(char *str, int pidserv)
 {
 	int	num_bit;
 	int	i;
 
 	num_bit = 0;
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 		while (num_bit < 8)
 		{
 			if (((str[i]) & (1 << num_bit)) == 0)
 			{
-				kill(pidserv, SIGUSR2);
+				if (kill(pidserv, SIGUSR2))
+					return (-1);
 			}
 			else
 			{
-				kill(pidserv, SIGUSR1);
+				if (kill(pidserv, SIGUSR1))
+					return (-1);
 			}
 			usleep(500);
 			num_bit++;
 		}
 		num_bit = 0;
-		i++;
 	}
+	return (0);
 }
 
-void	send_binary_int(int i, int pidserv)
+int	send_binary_int(int i, int pidserv)
 {
 	int	num_bit;
 
@@ -50,15 +52,18 @@ void	send_binary_int(int i, int pidserv)
 	{
 		if ((i & (1 << num_bit)) == 0)
 		{
-			kill(pidserv, SIGUSR2);
+			if (kill(pidserv, SIGUSR2))
+				return (-1);
 		}
 		else
 		{
-			kill(pidserv, SIGUSR1);
+			if (kill(pidserv, SIGUSR1))
+				return (-1);
 		}
 		usleep(500);
 		num_bit++;
 	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -69,7 +74,8 @@ int	main(int argc, char **argv)
 		return (-1);
 	pidserv = ft_atoi(argv[1]);
 	ft_printf("Pid:%d\n", pidserv);
-	send_binary_int(ft_strlen(argv[2]), pidserv);
-	send_binary_str(argv[2], pidserv);
-	return (0);
+	if (send_binary_int(ft_strlen(argv[2]), pidserv) == -1)
+		return (1);
+	if (send_binary_str(argv[2], pidserv) == -1)
+		return (1);
 }
